@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <link type="text/css" rel="stylesheet" href="resources/sheet.css" >
+  <style type="text/css">
+    .ritz .waffle a { color: inherit; }
+    .ritz .waffle .s0{
+      background-color:#ffffff;text-align:left;color:#000000;font-family:Arial;font-size:10pt;
+      vertical-align:bottom;white-space:nowrap;direction:ltr;padding:2px 3px 2px 3px;
+    }
+    .ritz .waffle .s2{
+      background-color:#ffffff;text-align:center;color:#000000;font-family:Arial;font-size:12pt;
+      vertical-align:bottom;white-space:nowrap;direction:ltr;padding:2px 3px 2px 3px;
+    }
+    .ritz .waffle .s1{
+      background-color:#ffffff;text-align:left;color:#000000;font-family:Arial;font-size:12pt;
+      vertical-align:bottom;white-space:nowrap;direction:ltr;padding:2px 3px 2px 3px;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #f0f8ff; /* 옅은 파란 배경 */
+      font-family: 'Malgun Gothic', sans-serif;
+      color: #003366; /* 진한 파랑 계열 글자색 */
+      text-align: center; /* 전체 가운데 정렬 */
+      position: relative;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 40px 20px;
+      position: relative;
+    }
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 0.5em;
+    }
+    .description {
+      font-size: 1.1rem;
+      margin-bottom: 30px;
+      white-space: pre-wrap;
+      line-height: 1.4rem;
+    }
+    .search-box {
+      margin-bottom: 20px;
+    }
+    .search-box input {
+      width: 40%; /* 조금 줄임 */
+      padding: 10px;
+      font-size: 1rem;
+      border: 2px solid #1E90FF;
+      border-radius: 4px;
+      margin-right: 5px;
+    }
+    .search-box button {
+      background-color: #1E90FF;
+      color: #fff;
+      padding: 11px 20px;
+      border: none;
+      border-radius: 4px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    .search-box button:hover {
+      background-color: #005DB3;
+    }
+    .letter {
+      margin-top: 30px;
+      font-size: 1.2rem;
+      line-height: 1.6rem;
+      white-space: pre-wrap;
+      text-align: center;
+    }
+    .highlight {
+      font-weight: bold;
+      color: #0066cc;
+    }
+    .link a {
+      color: #1E90FF;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .link a:hover {
+      text-decoration: underline;
+    }
+
+    /* 관리자 모드 아이콘 (top-right corner) */
+    .admin-icon {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      cursor: pointer;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background-color: #1E90FF;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+    .admin-icon:hover {
+      background-color: #005DB3;
+    }
+
+    /* 비밀번호 입력 모달 */
+    .admin-login {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      justify-content: center; align-items: center;
+    }
+    .admin-login-content {
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      text-align: center;
+      max-width: 300px;
+      margin: 0 auto;
+    }
+    .admin-login-content h2 {
+      margin-bottom: 1em;
+      font-size: 1.2em;
+      color: #333;
+    }
+    .admin-login-content input {
+      width: 80%;
+      padding: 8px;
+      margin-bottom: 10px;
+      font-size: 1em;
+    }
+
+    /* 메인 검색 화면 */
+    #searchSection {
+      display: block;
+    }
+
+    /* 관리자 모드 화면 */
+    #adminSection {
+      display: none;
+      margin-top: 40px;
+    }
+
+    /* 아이콘들을 세로 한 줄로 */
+    .icon-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      margin-top: 30px;
+    }
+    .icon-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 300px;
+      height: 50px;
+      background-color: #1E90FF;
+      color: #fff;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: bold;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .icon-button:hover {
+      background-color: #005DB3;
+    }
+
+    /* 회색 글씨 안내 */
+    .refund-notice {
+      background-color: #f0f8ff;
+      color: #666;
+      font-size: 0.9rem;
+      line-height: 1.4rem;
+      margin: 30px auto 0 auto;
+      padding: 15px;
+      max-width: 700px;
+      text-align: left;
+      white-space: pre-wrap;
+    }
+  </style>
+
+  <title>NTB 19기 챌린지 학습초대코드 확인</title>
+</head>
+<body>
+  <!-- 관리자 모드 아이콘 (우측 상단) -->
+  <div class="admin-icon" onclick="openAdminLogin()">A</div>
+
+  <!-- 관리자 비밀번호 입력 모달 (비밀번호 마스킹) -->
+  <div class="admin-login" id="adminLogin">
+    <div class="admin-login-content">
+      <h2>관리자 모드 비밀번호</h2>
+      <input type="password" id="adminPasswordInput" placeholder="비밀번호 입력" />
+      <br/>
+      <button onclick="checkAdminPassword()">확인</button>
+      <button onclick="closeAdminLogin()">취소</button>
+    </div>
+  </div>
+
+  <div class="container">
+    <!-- 검색 섹션 -->
+    <div id="searchSection">
+      <h1>NTB 19기 챌린지 학습초대코드 확인</h1>
+      <div class="description">
+        학습 초대코드는 28일부터 검색이 가능합니다.^^<br/>
+        학습은 매월 1일 진행됩니다.(시작일이 다른 경우 별도공지)
+      </div>
+
+      <div class="search-box">
+        <input type="text" id="phoneInput" placeholder="000-0000-0000 형식으로 입력" />
+        <button onclick="searchCode()">검색</button>
+      </div>
+
+      <div id="resultArea"></div>
+    </div>
+
+    <!-- 관리자 모드: 구글 시트 HTML 코드 + 돌아가기 아이콘 + 붙여넣기 기능 -->
+    <div id="adminSection">
+      <h1>관리자 모드</h1>
+      <p>뒤로가기/새로고침 시 비밀번호를 다시 입력해야 합니다.</p>
+      <button
+        style="background-color:#1E90FF; color:#fff; padding:8px 14px; border:none; border-radius:4px; cursor:pointer; font-size:1rem;"
+        onclick="goSearchMode()"
+      >
+        학습코드 확인창으로
+      </button>
+
+      <!-- 붙여넣기 기능을 위한 영역 -->
+      <div style="margin-top:20px; text-align:center;">
+        <textarea id="sheetSnippet" rows="8" cols="80" placeholder="235~294행의 시트 HTML 코드를 여기에 붙여넣으세요."></textarea>
+        <br/>
+        <button style="margin-top:10px; padding:8px 14px; background-color:#1E90FF; color:#fff; border:none; border-radius:4px; cursor:pointer;" onclick="replaceWaffleSnippet()">
+          붙여넣기
+        </button>
+      </div>
+
+      <div class="ritz grid-container" dir="ltr" id="myWaffle">
+        <!-- 기본 시트 테이블 (초기 상태) -->
+        <table class="waffle" cellspacing="0" cellpadding="0">
+          <thead>
+            <tr>
+              <th class="row-header freezebar-origin-ltr"></th>
+              <th id="0C0" class="column-headers-background">A</th>
+              <th id="0C1" class="column-headers-background">B</th>
+              <th id="0C2" class="column-headers-background">C</th>
+              <th id="0C3" class="column-headers-background">D</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="height: 20px">
+              <th>1</th>
+              <td class="s0">과목</td>
+              <td class="s0">결제자</td>
+              <td class="s0">연락처</td>
+              <td class="s0">안내 내용</td>
+            </tr>
+            <!-- 예시 기본 데이터 -->
+            <tr style="height: 20px">
+              <th>2</th>
+              <td class="s1">바베쌤-중등영단어순한맛</td>
+              <td class="s1">바베</td>
+              <td class="s1">010-2666-0304</td>
+              <td class="s0">안내 코드 샘플</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    // 관리자 비밀번호
+    const ADMIN_PASSWORD = '@ntb307030405';
+
+    // tableData = [ { subject, payer, phone, info } ]
+    let tableData = [];
+
+    window.addEventListener('DOMContentLoaded', () => {
+      parseSheetData();
+      const phoneInput = document.getElementById('phoneInput');
+      phoneInput.addEventListener('keyup', (e) => {
+        if (e.key === 'Enter') {
+          searchCode();
+        }
+      });
+    });
+
+    // 기존 parseSheetData() 로직 그대로
+    function parseSheetData() {
+      const waffle = document.getElementById('myWaffle');
+      if (!waffle) return;
+
+      const rows = waffle.querySelectorAll('tbody tr');
+      tableData = [];
+      // skip header row (index=0)
+      for (let i = 1; i < rows.length; i++) {
+        const cells = rows[i].querySelectorAll('td');
+        const subject = cells[0]?.innerText.trim() || '';
+        const payer   = cells[1]?.innerText.trim() || '';
+        const phone   = cells[2]?.innerText.trim() || '';
+        const info    = cells[3]?.innerHTML.trim() || '';
+        tableData.push({ subject, payer, phone, info });
+      }
+    }
+
+    function openAdminLogin() {
+      document.getElementById('adminLogin').style.display = 'flex';
+    }
+    function closeAdminLogin() {
+      document.getElementById('adminLogin').style.display = 'none';
+    }
+
+    function checkAdminPassword() {
+      const inputPass = document.getElementById('adminPasswordInput').value.trim();
+      if (inputPass === ADMIN_PASSWORD) {
+        closeAdminLogin();
+        document.getElementById('searchSection').style.display = 'none';
+        document.getElementById('adminSection').style.display = 'block';
+      } else {
+        alert('비밀번호가 올바르지 않습니다.');
+      }
+    }
+
+    function goSearchMode() {
+      document.getElementById('adminSection').style.display = 'none';
+      document.getElementById('searchSection').style.display = 'block';
+    }
+
+    // 붙여넣기 버튼
+    function replaceWaffleSnippet() {
+      const snippet = document.getElementById('sheetSnippet').value;
+      if (!snippet) {
+        alert('붙여넣을 코드가 없습니다!');
+        return;
+      }
+      // snippet에 <table>...</table>이 있다고 가정
+      // myWaffle 영역 안의 내용을 교체
+      const myWaffleDiv = document.getElementById('myWaffle');
+      myWaffleDiv.innerHTML = snippet;
+
+      // 교체 후 다시 파싱 -> 검색 반영
+      parseSheetData();
+      alert('시트 정보가 업데이트되었습니다.');
+    }
+
+    function searchCode() {
+      const phoneInput = document.getElementById('phoneInput').value.trim();
+      const resultArea = document.getElementById('resultArea');
+      resultArea.innerHTML = '';
+
+      if (!phoneInput) {
+        alert('전화번호를 입력하세요!');
+        return;
+      }
+
+      let foundRow = null;
+      for (const row of tableData) {
+        if (row.phone === phoneInput) {
+          foundRow = row;
+          break;
+        }
+      }
+
+      if (foundRow) {
+        const { subject, payer, phone, info } = foundRow;
+        resultArea.innerHTML = `
+          <div class="letter">
+            안녕하세요!<br/>
+            고객님 전화번호 <span class="highlight">${phone}</span> 로 조회한 결과<br/><br/>
+            <span class="highlight">챌린지</span>: ${subject}<br/>
+            <span class="highlight">결제자</span>: ${payer}<br/><br/>
+            <span class="highlight">안내 내용</span>:<br/>
+            <span class="highlight">${info}</span><br/><br/>
+            즐거운 학습 되세요!
+          </div>
+          ${renderIcons()}
+          ${renderRefundNotice()}
+        `;
+      } else {
+        // default message
+        resultArea.innerHTML = `
+          <div class="letter">
+            반갑습니다.^^ 엔티비챌린지 구매해주셔서 감사합니다.<br/>
+            매월 1일 챌린지가 시작됩니다.<br/>
+            구매 후 1~2일 이내로 학습초대코드를 확인하실 수 있습니다.<br/>
+            1~2일 이내 초대 코드를 확인할 수 없거나 오류가 있다면<br/>
+            엔티비카카오채널 고객센터로 연락주세요.<br/><br/>
+            <span class="link">
+              <a href="https://center-pf.kakao.com/_GltxfG" target="_blank">
+                카카오 채널 바로가기
+              </a>
+            </span>
+          </div>
+        `;
+      }
+    }
+
+    function renderIcons() {
+      return `
+        <div class="icon-container">
+          <a class="icon-button" href="https://ntb307.co.kr/cs" target="_blank">엔티비고객센터</a>
+          <a class="icon-button" href="https://ntb307.co.kr/90" target="_blank">챌린지진행방법</a>
+          <a class="icon-button" href="https://play.google.com/store/apps/details?id=classcard.net" target="_blank">학습어플다운로드방법-학생용가입</a>
+          <a class="icon-button" href="https://youtu.be/0MQ32z2WrzY?si=oMUCiPQddNhf2WWM" target="_blank">학습어플사용방법안내영상</a>
+          <a class="icon-button" href="https://cafe.naver.com/followdj" target="_blank">엔티비인증카페</a>
+          <a class="icon-button" href="https://pf.kakao.com/_GltxfG/chat" target="_blank">상담원연결</a>
+        </div>
+      `;
+    }
+
+    function renderRefundNotice() {
+      return `
+        <div class="refund-notice">
+엔티비 챌린지 환불 및 연기안내
+
+안녕하세요. 엔티비 구매 감사합니다. 엔티비는 챌린지 1개월 사용권입니다. 따라서 챌린지 시작 전 100% 취소 및 환불이 가능하며 각 챌린지가 시작되면 환불이 불가함을 공지합니다. 
+챌린님들의 사정으로 인하여 챌린지 연기를 원하신다면 익월 7일 이내 1회, 3개월 연기 신청이 가능하십니다.
+
+꼭 강사님들의 공지에 맞춰 20~27일 동안 완주하여(복습+5다음달 5일 퇴원처리됩니다.^^), 잠자는 영어 세포를 깨워보세요.  
+
+정해진 기간 동안 꾸준한 노력과 참여로 영어 능력을 향상시키는 과정에서, 지속적인 참여가 중요하다는 점을 기억하세요. 
+NTB챌린지의 성공적인 완주는 효과적인 학습과 함께, 동기부여와 습관 형성에도 도움이 될 것입니다.  
+
+NTB챌린지는 「전자상거래 및 소비자 보호에 관한 법률」등 관계 법률에 위배하지 아니하는 범위 내에서 취소 및 환불 규정을 개정할 수 있습니다.
+        </div>
+      `;
+    }
+  </script>
+</body>
+</html>
