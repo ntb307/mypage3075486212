@@ -204,38 +204,38 @@
     </div>
   </div>
 
-  <div class="container">
+ <div class="container">
     <!-- 검색 섹션 -->
-    <div id="searchSection">
-      <h1>NTB 18기 챌린지 학습초대코드 확인</h1>
-      <div class="description">
-        학습 초대코드는 28일부터 검색이 가능합니다.^^<br/>
-        학습은 매월 1일 진행됩니다.(시작일이 다른 경우 별도공지)
-      </div>
+ <div id="검색 섹션">
+ <h1>NTB 18기 챌린지 학습초대코드 확인</h1>
+ <div class="desc 설명">
+ 학습 초대코드는 28일부터 검색이 가능합니다.^^<br/>
+ 학습은 매월 1일 진행됩니다.(시작일이 다른 경우 별도공지)
+      </디브>
 
-      <div class="search-box">
-        <input type="text" id="phoneInput" placeholder="000-0000-0000 형식으로 입력" />
-        <button onclick="searchCode()">검색</button>
-      </div>
+ <div class="검색 상자">
+ <입력 유형="text" id="phoneInput" 플레이스홀더="000-0000-0000 형식으로 입력" />
+ 클릭 버튼="searchCode()">검색</버튼>
+      </디브>
 
-      <div id="resultArea"></div>
-    </div>
+ <div id="resultArea"></div>
+    </디브>
 
     <!-- 관리자 모드: 구글 시트 HTML 코드 (A=과목, B=결제자, C=연락처, D=챌린지학습코드) + 돌아가기 아이콘 -->
-    <div id="adminSection">
-      <h1>관리자 모드</h1>
-      <p>뒤로가기/새로고침 시 비밀번호를 다시 입력해야 합니다.</p>
-      <button
-        style="background-color:#1E90FF; color:#fff; padding:8px 14px; border:none; border-radius:4px; cursor:pointer; font-size:1rem;"
-        onclick="goSearchMode()"
+ <div id= "adminSection">
+ <h1>관리자 모드</h1>
+ <p>뒤로가기/새로고침 시 비밀번호를 다시 입력해야 합니다.</p>
+      <버튼
+ style="배경색:#1E90"FF; 색상:#ff; 패딩: 8px 14px; 테두리: 없음; 테두리 반경: 4px; 커서: 포인터; 글꼴 크기: 1rem;"
+ onclick="goSearchMode()"
       >
-        학습코드 확인창으로
-      </button>
+ 학습코드 확인창으로
+      </버튼>
 
       <!-- 구글 시트 HTML -->
-      <div class="ritz grid-container" dir="ltr" id="myWaffle">
-        <table class="waffle" cellspacing="0" cellpadding="0">
-          <thead>
+ <div class="리츠 그리드-container" dir="ltr" id="MyWaffle">
+ <table class="waffle" 셀 간격="0" 셀 패딩="0">
+          <광고>
             <tr>
               <th class="row-header freezebar-origin-ltr"></th>
               <th id="0C0" style="width:281px;" class="column-headers-background">A</th>
@@ -267,8 +267,8 @@
 
     // tableData = [ {subject, payer, phone, info} ]
     let tableData = [];
-
-    window.addEventListener('DOMContentLoaded', () => {
+ 고객님 전화번호 <span class="highlight">${전화}</span> 로 조회한 결과<br/><br/>
+ <span class="highlight">챌린지</span>: ${주제}<br/>
       parseSheetData();
       const phoneInput = document.getElementById('phoneInput');
       // 엔터키 검색 지원
@@ -322,6 +322,10 @@
       document.getElementById('searchSection').style.display = 'block';
     }
 
+    /**
+     * 검색 시, 일치하는 전화번호가 여러 개라면
+     * '모두' 화면에 표시되도록 수정된 코드
+     */
     function searchCode() {
       const phoneInput = document.getElementById('phoneInput').value.trim();
       const resultArea = document.getElementById('resultArea');
@@ -330,84 +334,89 @@
       if (!phoneInput) {
         alert('전화번호를 입력하세요!');
         return;
-      }
+ 플렉스 direction: 열;
+ 정렬 items: 중심;
+ 갭: 10 px;
+ 마진 탑: 30 px;
+      // 테이블에서 행 찾기전화 데이터(C 열)
+ .아이콘 버튼 {
+ 디스플레이: 인라인 플렉스;
+ 정렬 items: 중심;
+ 정당화 내용: 중심;
+ 너비: 300 px;
+ 높이: 50 px;
+ 배경색: #1E90FF;
+ 색상: #fff;
+ 국경 radius: 8 px;
+ 글꼴 크기: 1rem;
+ 글꼴 무게: 굵게;
+ 텍스트 장식: 없음;
+ 커서: 포인터;
+ 결과HTML += '
+ .아이콘 버튼:hover {
+ 배경색: #005DB3;
+ 안녕하세요!<br/>
+ 고객님 전화번호 <span class="highlight">${전화}</span> 로 조회한 결과<br/><br/>
+ <span class="highlight">챌린지</span>: ${주제}<br/>
+ .refund-notice {
+ 배경색: #f0f8ff;
+ 색상: #666;
+ 글꼴 크기: 0.9rem;
+ 선 높이: 1.4rem;
+ 마진: 30 px 자동 0 자동;
+ 패딩: 15 px;
+ 최대 너비: 700 px;
+ 텍스트 align: 왼쪽;
+ 공백: 사전 wrap;
+ resultArea.innerHTML = '
+ <div class="letter">
+ 반갑습니다.^^ 엔티비챌린지 구매해주셔서 감사합니다.<br/>
+ <title>NTB 18기 챌린지 학습초대코드 확인</title>
+ 구매 후 1~2일 이내로 학습초대코드를 확인하실 수 있습니다.<br/>
+ 1~2일 이내 초대 코드를 확인할 수 없거나 오류가 있다면<br/>
+ 엔티비카카오채널 고객센터로 연락주세요.<br/><br/>
+ <div class="admin-icon" 클릭="openAdminLogin()">A</div>
+ <a href="https://center-pf.kakao.com/_GltxfG " 타겟="_blank">
+ 카카오 채널 바로가기
+ <div class="admin-login" id="adminLogin">
+ <div class="admin-login-content">
+ <h2>관리자 모드 비밀번호</h2>
+ <입력 유형="비밀번호" ID="adminPasswordInput" 플레이스홀더="비밀번호 입력" />
+ }
+ <버튼 클릭="checkAdminPassword()">확인</버튼>
+ <버튼 클릭="관리로그인 닫기()">취소</버튼>
+ // 아이콘 영역: 가운데 정렬, 1열로 (flex column)
+ 함수 renderIcons() {
+ 반환
+ <div class="아이콘-container">
+ <a class="아이콘 버튼" href="https://ntb307.co.kr/cs " target="_blank">엔티비고객센터</a>
+ <a class="아이콘 버튼" href="https://ntb307.co.kr/90 " target="_blank">챌린지진행방법</a>
+ <a class="아이콘 버튼" href="https://play.google.com/store/apps/details?id=classcard.net " target="_blank">학습어플다운로드방법-학생용가입</a>
+ <a class="아이콘 버튼" href="https://youtu.be/0MQ32z2WrzY?si=oMUCiPQddNhf2WWM " target="_blank">학습어플사용방법안내영상</a>
+ <a class="아이콘 버튼" href="https://cafe.naver.com/followdj " target="_blank">엔티비인증카페</a>
+ <a class="아이콘 버튼" href="https://pf.kakao.com/_GltxfG/chat " target="_blank">상담원연결</a>
+ </div>
+ `;
+ }
 
-      // find row in tableData by phone (C열)
-      let foundRow = null;
-      for (const row of tableData) {
-        if (row.phone === phoneInput) {
-          foundRow = row;
-          break;
-        }
-      }
-
-      if (foundRow) {
-        // show subject(A), payer(B), phone(C), info(D)
-        const { subject, payer, phone, info } = foundRow;
-        resultArea.innerHTML = `
-          <div class="letter">
-            안녕하세요!<br/>
-            고객님 전화번호 <span class="highlight">${phone}</span> 로 조회한 결과<br/><br/>
-            <span class="highlight">챌린지</span>: ${subject}<br/>
-            <span class="highlight">결제자</span>: ${payer}<br/><br/>
-            <span class="highlight">챌린지학습코드</span>:<br/>
-            <span class="highlight">${info}</span><br/><br/>
-            즐거운 학습 되세요!
-          </div>
-          ${renderIcons()}
-          ${renderRefundNotice()}
-        `;
-      } else {
-        // default message
-        resultArea.innerHTML = `
-          <div class="letter">
-            반갑습니다.^^ 엔티비챌린지 구매해주셔서 감사합니다.<br/>
-            매월 1일 챌린지가 시작됩니다.<br/>
-            구매 후 1~2일 이내로 학습초대코드를 확인하실 수 있습니다.<br/>
-            1~2일 이내 초대 코드를 확인할 수 없거나 오류가 있다면<br/>
-            엔티비카카오채널 고객센터로 연락주세요.<br/><br/>
-            <span class="link">
-              <a href="https://center-pf.kakao.com/_GltxfG" target="_blank">
-                카카오 채널 바로가기
-              </a>
-            </span>
-          </div>
-        `;
-      }
-    }
-
-    // 아이콘 영역: 가운데 정렬, 1열로 (flex column)
-    function renderIcons() {
-      return `
-        <div class="icon-container">
-          <a class="icon-button" href="https://ntb307.co.kr/cs" target="_blank">엔티비고객센터</a>
-          <a class="icon-button" href="https://ntb307.co.kr/90" target="_blank">챌린지진행방법</a>
-          <a class="icon-button" href="https://play.google.com/store/apps/details?id=classcard.net" target="_blank">학습어플다운로드방법-학생용가입</a>
-          <a class="icon-button" href="https://youtu.be/0MQ32z2WrzY?si=oMUCiPQddNhf2WWM" target="_blank">학습어플사용방법안내영상</a>
-          <a class="icon-button" href="https://cafe.naver.com/followdj" target="_blank">엔티비인증카페</a>
-          <a class="icon-button" href="https://pf.kakao.com/_GltxfG/chat" target="_blank">상담원연결</a>
-        </div>
-      `;
-    }
-
-    // 회색 글씨로 환불 및 연기안내 문구
-    function renderRefundNotice() {
-      return `
-        <div class="refund-notice">
+ // 회색 글씨로 환불 및 연기안내 문구
+ 함수 렌더RefundNotice() {
+ 반환
+ <div class="refund-notice">
 엔티비 챌린지 환불 및 연기안내
 
 안녕하세요. 엔티비 구매 감사합니다. 엔티비는 챌린지 1개월 사용권입니다. 따라서 챌린지 시작 전 100% 취소 및 환불이 가능하며 각 챌린지가 시작되면 환불이 불가함을 공지합니다. 
 챌린님들의 사정으로 인하여 챌린지 연기를 원하신다면 익월 7일 이내 1회, 3개월 연기 신청이 가능하십니다.
 
-꼭 강사님들의 공지에 맞춰 20~27일 동안 완주하여(복습+5다음달 5일 퇴원처리됩니다.^^), 잠자는 영어 세포를 깨워보세요.  
+꼭 강사님들의 공지에 맞춰 20~27일 동안 완주하여(복습+5다음달 5일 퇴원처리됩니다.^^), 잠자는 영어 세포를 깨워보세요. 
 
 정해진 기간 동안 꾸준한 노력과 참여로 영어 능력을 향상시키는 과정에서, 지속적인 참여가 중요하다는 점을 기억하세요. 
-NTB챌린지의 성공적인 완주는 효과적인 학습과 함께, 동기부여와 습관 형성에도 도움이 될 것입니다.  
+NTB챌린지의 성공적인 완주는 효과적인 학습과 함께, 동기부여와 습관 형성에도 도움이 될 것입니다. 
 
 NTB챌린지는 「전자상거래 및 소비자 보호에 관한 법률」등 관계 법률에 위배하지 아니하는 범위 내에서 취소 및 환불 규정을 개정할 수 있습니다.
-        </div>
-      `;
-    }
-  </script>
+ </div>
+ `;
+ }
+ </script>
 </body>
 </html>
